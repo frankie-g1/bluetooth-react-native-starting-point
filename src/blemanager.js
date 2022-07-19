@@ -1,6 +1,6 @@
 import {BleManager} from 'react-native-ble-plx';
 import React, {Component} from 'react'
-import {Text} from 'react-native'
+import {Text, PermissionsAndroid} from 'react-native'
 
 class BManager extends Component {
 
@@ -29,9 +29,11 @@ class BManager extends Component {
 
 
     scanAndConnect() {
+
         this.manager.startDeviceScan(null, null, (error, device) => {
             if (error) {
-                console.log("error")
+                console.log("error") // stops here so far
+                                        // [BleError: Cannot start scanning operation]
                 console.log(error)
                 // Handle error (scanning will be stopped automatically)
                 return
