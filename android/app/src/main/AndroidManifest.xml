@@ -8,6 +8,9 @@
    -->
     <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
     
+
+    <uses-feature android:name="android.hardware.bluetooth" android:required="true"/>
+
         <!-- Request legacy Bluetooth permissions on older devices. -->
     <uses-permission android:name="android.permission.BLUETOOTH"
                      android:maxSdkVersion="30" />
@@ -20,8 +23,7 @@
          If your app doesn't use Bluetooth scan results to derive physical
          location information, you can strongly assert that your app
          doesn't derive physical location. -->
-     <uses-permission android:name="android.permission.BLUETOOTH_SCAN"
-                     android:usesPermissionFlags="neverForLocation" />
+     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
 
     <!-- Needed only if your app makes the device discoverable to Bluetooth
          devices. -->
@@ -30,6 +32,10 @@
     <!-- Needed only if your app communicates with already-paired Bluetooth
          devices. -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
+
+    <!-- Adding this in to add in anything that was previously excluded which may be causing my current BLE Cannot start scanning operation-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
 
 
     <uses-sdk android:minSdkVersion="23"/>

@@ -34,7 +34,7 @@ class BManager extends Component {
             if (error) {
                 console.log("error") // stops here so far
                                         // [BleError: Cannot start scanning operation]
-                console.log(error)
+                console.log(JSON.stringify(error))
                 // Handle error (scanning will be stopped automatically)
                 return
             }
