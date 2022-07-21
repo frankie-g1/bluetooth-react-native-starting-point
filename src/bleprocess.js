@@ -56,7 +56,7 @@ const bleprocess = ({manager}) => {
 }
 
 
-export default bleprocess;
+// export default bleprocess; this is a functional version of blemanager
 
 
 

@@ -1,6 +1,37 @@
 import {BleManager} from 'react-native-ble-plx';
 import React, {Component} from 'react'
-import {Text, PermissionsAndroid} from 'react-native'
+import {Text, PermissionsAndroid, Button} from 'react-native'
+
+
+
+
+const requestBluetoothPermission = async (props) =>{
+
+    console.log(props)
+    try {
+        const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.BLUETOOTH_SCAN,
+            {
+                title:"Coolio Bluetooth Permission Request",
+                message: "GIVE US BEEGLETOOTH NOW",
+                buttonNeutral: "Ask me later",
+                buttonNegative: "Cancel",
+                buttonPositive: "OK"
+            }
+        );
+        if(granted == PermissionsAndroid.RESULTS.GRANTED){
+            console.log("You can use the bluetooth")
+        } else {
+            console.log("Bluetooth permission denied")
+        }
+    } catch(err){
+        console.warn(err)
+    }
+}
+
+
+
+
 
 class BManager extends Component {
 
@@ -10,10 +41,8 @@ class BManager extends Component {
         
     }
 
-    
-
-
-    componentWillMount() {
+    // componentWillMount is legacy, for any listeners on state change use componentDidMount. sourced here : https://reactjs.org/blog/2018/03/27/update-on-async-rendering.html
+    componentDidMount() {
         const subscription = this.manager.onStateChange((state) => {
             if (state === 'PoweredOn') {
                 console.log("powered on")
@@ -31,6 +60,8 @@ class BManager extends Component {
     scanAndConnect() {
 
         this.manager.startDeviceScan(null, null, (error, device) => {
+            // To avoid bluetooth access errors, use the permissions API
+
             if (error) {
                 console.log("error") // stops here so far
                                         // [BleError: Cannot start scanning operation]
@@ -70,7 +101,10 @@ class BManager extends Component {
     render(){
 
         return(
+            <>
             <Text>BLE MANAGER </Text>
+            <Button title="request bluetooth" onPress={requestBluetoothPermission} />
+            </>
         )
     }
 
